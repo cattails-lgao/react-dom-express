@@ -13,17 +13,7 @@ const ERROR_CODE = 1;
 
 const LOGIN = {
     url: '/login',
-    methods: [REQUESTMETHODGET],
-    validate: {
-        username: {
-            required: true,
-            msg: '缺少username'
-        },
-        password: {
-            required: true,
-            msg: '缺少password'
-        }
-    }
+    methods: [REQUESTMETHODGET]
 };
 module.exports = {
     SUCCEED_CODE,
