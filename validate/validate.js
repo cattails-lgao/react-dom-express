@@ -15,7 +15,19 @@ const min = 10                     // 输入值不能小于10
 
 const validate = {
     rules: [],
-    checked: () => {}
+    checked: function(parameter) {
+        let paramsKey = Object.keys(parameter);
+        let result = this.rules.filter(item => {
+            if(item.required) {
+                let index = paramsKey.findIndex(key => key == item.name);
+                if(!~index) {
+                    return item.msg;
+                }
+            }
+        })
+    
+        return result;
+    }
 };
 
-moudule.export = validate;
+module.exports = validate;

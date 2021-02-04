@@ -1,5 +1,5 @@
 const LoginValidate = require('./login');
 
-moudule.export = {
+module.exports = {
     LoginValidate
 }

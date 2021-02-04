@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const { LOGIN, ERROR_CODE } = require('./constant');
+const { LOGIN, ERROR_CODE } = require('../router/constant');
 const { LoginValidate } = require('../validate');
 
 // 全局中间件
@@ -10,15 +10,17 @@ router.use(function timeLog (req, res, next) {
 })
 
 // login中间件
-router.use(LOGIN.url, (req ,res ,next) => {
-    if(LoginValidate.checked(req)){
+router.use(LOGIN, (req, res, next) => {
+    let [username, password] = Object.keys(req.body);
+    let validateRes = LoginValidate.checked(req.body);
+    console.log(validateRes);
+    if(validateRes.length){
         res.status(400).send({
             status: ERROR_CODE,
-            msg: LOGIN.validate.username.msg
+            msg: validateRes.join(',')
         });
         return;   
     }
     next();
 })
-
-moudule.export = router;
+module.exports= router

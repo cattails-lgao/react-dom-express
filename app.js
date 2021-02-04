@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
 const port = 5001;
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended:false}))
+
 // 路由
 const allRouter = require('./router');
 

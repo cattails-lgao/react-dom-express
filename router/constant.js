@@ -11,10 +11,7 @@ const REQUESTMETHODPATCH = 'patch';
 const SUCCEED_CODE = 0;
 const ERROR_CODE = 1;
 
-const LOGIN = {
-    url: '/login',
-    methods: [REQUESTMETHODGET]
-};
+const LOGIN = '/login';
 module.exports = {
     SUCCEED_CODE,
     ERROR_CODE,

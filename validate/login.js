@@ -15,18 +15,7 @@ LoginValidate.rules = [
     }
 ]
 
-LoginValidate.checked = (parameter) => {
-    let result = [];
-    for(let i = 0; i < this.rules.length; i++) {
-        let value = parameter[this.rules[i].name];
-        if(this.rules[i].required && value) {
-            result.push(true);
-            break;
-        }
-    }
+LoginValidate.checked = validate.checked.bind(LoginValidate)
 
-    return result.every(item => {
-        return !!item;
-    })
-}
+module.exports = LoginValidate;
 
