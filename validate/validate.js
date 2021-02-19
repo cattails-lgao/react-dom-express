@@ -12,21 +12,19 @@ const rangelength = [5,10]         // 输入长度必须介于 5 和 10 之间�
 const range = [5,10]               // 输入值必须介于 5 和 10 之间
 const max = 5                      // 输入值不能大于5
 const min = 10                     // 输入值不能小于10
+const initTips = '缺少参数';
 
 const validate = {
     rules: [],
     checked: function(parameter) {
         let paramsKey = Object.keys(parameter);
         let result = this.rules.filter(item => {
-            if(item.required) {
-                let index = paramsKey.findIndex(key => key == item.name);
-                if(!~index) {
-                    return item.msg;
-                }
-            }
+            if(!item.required) return false;
+
+            let index = paramsKey.findIndex(key => key == item.name);
+            if(!~index) return true;
         })
-    
-        return result;
+        return result.map(item => item.name);
     }
 };
 

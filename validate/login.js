@@ -5,13 +5,11 @@ const LoginValidate = Object.create(validate);
 LoginValidate.rules = [
     {
         name: 'username',
-        required: true,
-        msg: '缺少参数username'
+        required: true
     },
     {
         name: 'password',
-        required: true,
-        msg: '缺少参数password'
+        required: true
     }
 ]
 

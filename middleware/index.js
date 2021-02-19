@@ -13,11 +13,10 @@ router.use(function timeLog (req, res, next) {
 router.use(LOGIN, (req, res, next) => {
     let [username, password] = Object.keys(req.body);
     let validateRes = LoginValidate.checked(req.body);
-    console.log(validateRes);
     if(validateRes.length){
         res.status(400).send({
             status: ERROR_CODE,
-            msg: validateRes.join(',')
+            msg: '缺少参数' + validateRes.join(',')
         });
         return;   
     }
