@@ -1,29 +1,18 @@
 const express = require('express')
 const app = express()
+const { userRouter, categoryRouter, productRouter,roleRouter } = require('./router');
+const { MongoDb } = require('./DB')
 const port = 5001;
-
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // 路由
-const allRouter = require('./router');
-
-app.use('/api', allRouter);
-
-// 开启mongoDB服务
-const mongoose = require('mongoose');
-// 连接mongoDB
-mongoose.connect('mongodb://localhost/server_db2', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true
-})
+app.use('/api', userRouter);
+app.use('/api', categoryRouter);
+app.use('/api', productRouter);
+app.use('/api', roleRouter);
 
 // 开启mongoDB监听
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    // we're connected!
-    app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-});
+MongoDb(() => {
+  app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+})

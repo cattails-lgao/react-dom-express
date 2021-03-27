@@ -8,11 +8,11 @@ const { SUCCEED, ERROR, SYSTEM_BUSY, LinkBaseMsg } = require('../common/statusCo
 
 // 2.字义Schema(描述文档结构)
 const userSchema = new mongoose.Schema({
-  username: {type: String, required: true}, // 用户名
-  password: {type: String, required: true}, // 密码
+  username: { type: String, required: true }, // 用户名
+  password: { type: String, required: true }, // 密码
   phone: String,
   email: String,
-  create_time: {type: Number, default: Date.now},
+  create_time: { type: Number, default: Date.now },
   role_id: String
 })
 
@@ -30,7 +30,7 @@ UserModel.findOne({username: 'admin'}).then(user => {
 
 const selectUser = async (username, password) => {
   let findRes = await UserModel.findOne({ username, password: md5(password)}).exec();
-  if(typeof findRes != 'undefined' && findRes.role_id) return LinkBaseMsg(SUCCEED);
+  if(typeof findRes != 'undefined') return LinkBaseMsg(SUCCEED, findRes);
   return LinkBaseMsg(ERROR);
 }
 

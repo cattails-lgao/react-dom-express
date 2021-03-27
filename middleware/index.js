@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router();
+
 const { LOGIN, ERROR_CODE } = require('../router/constant');
 const { LoginValidate } = require('../validate');
 
@@ -22,4 +23,9 @@ router.use(LOGIN, (req, res, next) => {
     }
     next();
 })
-module.exports= router
+
+router.get('/test', (req, res) => {
+    res.send('测试成功')
+})
+
+module.exports = router
